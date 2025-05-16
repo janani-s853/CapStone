@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const today = new Date();
   const yyyy = today.getFullYear();
 
+  // Set DOB min/max range
   const maxDate = new Date(yyyy - 18, today.getMonth(), today.getDate());
   const minDate = new Date(yyyy - 55, today.getMonth(), today.getDate());
   dobInput.max = maxDate.toISOString().split("T")[0];
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadEntries() {
     const entries = JSON.parse(localStorage.getItem("registrations")) || [];
     entriesBody.innerHTML = "";
+
     entries.forEach((entry) => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -31,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="border px-4 py-2">${entry.email}</td>
         <td class="border px-4 py-2">${entry.password}</td>
         <td class="border px-4 py-2">${entry.dob}</td>
-        <td class="border px-4 py-2">${entry.terms ? "Yes" : "No"}</td>
+        <td class="border px-4 py-2">${entry.terms}</td>
       `;
       entriesBody.appendChild(row);
     });
@@ -44,30 +46,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
     const dob = document.getElementById("dob").value;
-    const terms = document.getElementById("terms").checked;
+    const termsChecked = document.getElementById("terms").checked;
 
     const age = getAge(dob);
-    warning.style.display = "none";
+    warning.classList.add("hidden");
 
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       warning.textContent = "Please enter a valid email address.";
-      warning.style.display = "block";
+      warning.classList.remove("hidden");
       return;
     }
 
     if (age < 18 || age > 55) {
       warning.textContent = "Age must be between 18 and 55 years.";
-      warning.style.display = "block";
+      warning.classList.remove("hidden");
       return;
     }
 
-    if (!terms) {
+    if (!termsChecked) {
       warning.textContent = "You must accept the terms and conditions.";
-      warning.style.display = "block";
+      warning.classList.remove("hidden");
       return;
     }
 
-    const entry = { name, email, password, dob, terms };
+    const entry = {
+      name,
+      email,
+      password,
+      dob,
+      terms: termsChecked ? "Yes" : "No"
+    };
+
     const entries = JSON.parse(localStorage.getItem("registrations")) || [];
     entries.push(entry);
     localStorage.setItem("registrations", JSON.stringify(entries));
@@ -76,5 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadEntries();
   });
 
+  // Load entries on page load
   loadEntries();
 });
