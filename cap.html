@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form</title>
+  <script defer src="cap.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 min-h-screen p-6">
+  <div class="max-w-xl mx-auto bg-white shadow-xl p-8 rounded-2xl">
+    <h2 class="text-3xl font-extrabold text-center mb-6 text-indigo-700">Registration Form</h2>
+    <form id="registrationForm" class="space-y-6">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" id="name" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="password" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      </div>
+      <div>
+        <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+        <input type="date" id="dob" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      </div>
+      <div class="flex items-center">
+        <input type="checkbox" id="terms" class="mr-2 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"/>
+        <label for="terms" class="text-sm text-gray-700">I accept the Terms and Conditions</label>
+      </div>
+      <p id="warning" class="text-red-600 text-sm hidden"></p>
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">Submit</button>
+    </form>
+  </div>
+
+  <div class="max-w-5xl mx-auto mt-12 bg-white shadow-md p-6 rounded-xl">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4"></h2>Entries</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-200 rounded-lg">
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            <th class="border px-4 py-3">Name</th>
+            <th class="border px-4 py-3">Email</th>
+            <th class="border px-4 py-3">Password</th>
+            <th class="border px-4 py-3">DOB</th>
+            <th class="border px-4 py-3">Accepted Terms?</th>
+          </tr>
+        </thead>
+        <tbody id="entriesBody" class="text-gray-800 text-sm"></tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
