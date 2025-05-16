@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="border px-4 py-2">${entry.email}</td>
         <td class="border px-4 py-2">${entry.password}</td>
         <td class="border px-4 py-2">${entry.dob}</td>
-        <td class="border px-4 py-2">${entry.terms}</td>
+        <td class="border px-4 py-2">${entry.terms ? "Yes" : "No"}</td>
       `;
       entriesBody.appendChild(row);
     });
@@ -47,23 +47,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const terms = document.getElementById("terms").checked;
 
     const age = getAge(dob);
-    warning.classList.add("hidden");
+    warning.style.display = "none";
 
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       warning.textContent = "Please enter a valid email address.";
-      warning.classList.remove("hidden");
+      warning.style.display = "block";
       return;
     }
 
     if (age < 18 || age > 55) {
       warning.textContent = "Age must be between 18 and 55 years.";
-      warning.classList.remove("hidden");
+      warning.style.display = "block";
       return;
     }
 
     if (!terms) {
       warning.textContent = "You must accept the terms and conditions.";
-      warning.classList.remove("hidden");
+      warning.style.display = "block";
       return;
     }
 
